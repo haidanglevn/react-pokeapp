@@ -1,0 +1,19 @@
+.card {
+    color: var(--blue);
+    width: 200px;
+    height: 300px;
+    background-color: var(--yellow);
+    border-radius: 20px;
+    text-align: center;
+    object-fit: cover;
+    border: 1px solid black;
+    
+}
+.card img {
+    width: 175px;
+    height: 80%;
+    background-color: lightcoral;
+    border-radius: 20px;
+  
+}
+.card a {color:var(--blue) ;}

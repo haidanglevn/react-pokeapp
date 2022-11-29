@@ -1,17 +1,16 @@
 import React from 'react';
 import classes from  "./Header.module.css"
+import Nav from './Nav';
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
     return (
       <header>
-        <div className={classes.logo}>
-          <h1>PokeApp</h1>
-        </div>
-        <div className={classes.links}>
-          <a href="/">Home</a>
-          <a href="/">PokeList</a>
-          <a href="/">About</a>
-        </div>
+        <NavLink to="/home" className={classes.logo}> 
+          <img src="" alt="" />
+        </NavLink>
+       
+        <Nav/>
       </header>
     );
 };

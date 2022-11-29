@@ -1,0 +1,14 @@
+.pokelist {
+    text-align: center;
+    background-color: var(--blue);
+    color: yellow;
+}
+.cardContainer {
+    display: flex;
+    gap: 30px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 0 5%;
+}

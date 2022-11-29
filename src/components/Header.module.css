@@ -1,17 +1,19 @@
-a {
-  text-decoration: none;
-  color: white;
-  padding: 0 20px;
-}
+
 header {
   background-color: black;
-  color: white;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  height: 100px;
+  
 }
 .logo {
   padding: 0 20px;
-  font-size: 30px;
+  height: 100%;
+  width: 300px;
+  background-image: url("./pokemon-logo.svg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }

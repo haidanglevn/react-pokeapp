@@ -1,6 +1,15 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+:root {
+  --red: #FF0000;
+  --boldred: #cc0000;
+  --blue:#3b4cca;
+  --yellow: #ffde00;
+  --lightyellow: #B3a125;
 }
 body {
   margin: 0;
