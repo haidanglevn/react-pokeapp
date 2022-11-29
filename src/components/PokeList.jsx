@@ -1,8 +1,8 @@
 import React from "react";
+import { Component } from "react";
+
 import Card from "./Card";
 import classes from "./PokeList.module.css";
-
-import { Component } from "react";
 
 class PokeList extends Component {
   state = {

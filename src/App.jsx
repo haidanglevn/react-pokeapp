@@ -1,12 +1,13 @@
 import "./App.css";
-import Layout from "./pages/Layout";
 import { Routes, Route , useParams} from "react-router-dom";
+import React, { Component } from "react";
+
+import Layout from "./pages/Layout";
 import Home from "./components/Home";
 import PokeList from "./components/PokeList";
 import About from "./components/About";
 import PokeSingle from "./components/PokeSingle";
 
-import React, { Component } from "react";
 
 // Just a work-around to use Hook with class component (higher-order component)
 const RouterWrapper = () => {
