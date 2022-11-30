@@ -1,41 +1,39 @@
-import { Component } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-class PokeSingle extends Component {
-  state = {
-    data: [],
-    isLoading: false,
-  };
+const PokeSingle = () => {
+  const params = useParams();
+  console.log(params);
+  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  componentDidMount() {
-    this.setState({ isLoading: true });
-    fetch(`https://pokeapi.co/api/v2/pokemon/${this.props.params.pokesingle}`)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({
-          data: data,
-          isLoading: false,
-        });
+  useEffect(() => {
+    setIsLoading(true);
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon/${params.pokesingle}`)
+      .then((res) => {
+        console.log(res);
+        setData(res.data);
+        setIsLoading(true);
       });
-  }
+  }, []);
 
-  render() {
-    console.log(this.props.params.pokesingle);
-    if (this.state.isLoading) {
-      return <div>Loading......</div>;
-    } else {
-      return (
-        <div>
-          <div>{this.state.data.name}</div>
-          <img
-            src={
-              this.state.data.sprites?.other["official-artwork"].front_default
-            }
-            alt=""
-          />
-        </div>
-      );
-    }
-  }
-}
+  console.log("test: ", data.types);
+
+  return (
+    <div>
+      <div>{data.name}</div>
+      <img src={data.sprites?.other["official-artwork"].front_default} alt="" />
+      <div>
+        {data.types.map((poke) => {
+          return <h2>{poke.type.name}</h2>;
+        })}
+      </div>
+      <button onClick={() => navigate(-1)}>Go Back</button>
+    </div>
+  );
+};
 
 export default PokeSingle;

@@ -1,64 +1,44 @@
-import React from "react";
-import { Component } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import Card from "./Card";
 import classes from "./PokeList.module.css";
 
-class PokeList extends Component {
-  state = {
-    data: [],
-    isLoading: false,
-  };
+const PokeList = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  componentDidMount() {
-    this.setState({ isLoading: true });
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=0")
-      .then((response) => response.json())
-      .then((data) => {
-        const fetches = data.results.map((p) => {
-          return fetch(p.url).then((res) => res.json());
+  useEffect(() => {
+    setIsLoading(true);
+    axios
+      .get("https://pokeapi.co/api/v2/pokemon?limit=50&offset=0")
+      .then((res) => {
+        const fetches = res.data.results.map((p) => {
+          return axios.get(p.url).then((res) => res.data);
         });
 
         Promise.all(fetches).then((res) => {
-          this.setState({
-            data: res,
-            isLoading: false,
-          });
+          setData(res); setIsLoading(false);
         });
       });
-  }
-  render() {
-    console.log(this.state.data);
-    const cardRender = this.state.data.map((pokemon) => {
-      let type = pokemon.types.map((pokemon) => pokemon.type.name);
-      console.log(type);
-      return (
-        <Card
-          key={pokemon.name}
-          name={pokemon.name}
-          url={pokemon.sprites.other["official-artwork"].front_default}
-          type={type}
-        />
-      );
-    });
-    if (this.state.isLoading) {
-      return (
-        <div className={classes.pokelist}>
-          <h1>PokeList here</h1>
-          <p>Page is loading.....</p>
-        </div>
-      );
-    } else {
-      return (
-        <div className={classes.pokelist}>
-          <h1>PokeList here</h1>
+  }, []);
 
-          {}
-          <div className={classes.cardContainer}>{cardRender}</div>
+  return (
+    <div>
+      <div className={classes.pokelist}>
+        <h1>PokeList here</h1>
+        <div className={classes.cardContainer}>
+          {data.map((card) => (
+            <Card
+              name={card.name}
+              key={card.name}
+              url={card.sprites.other["official-artwork"].front_default}
+            />
+          ))}
         </div>
-      );
-    }
-  }
-}
+      </div>
+    </div>
+  );
+};
 
 export default PokeList;
